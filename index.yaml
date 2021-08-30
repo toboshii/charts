@@ -3,6 +3,35 @@ entries:
   szurubooru:
   - apiVersion: v2
     appVersion: v2.5.0
+    created: "2021-08-30T02:27:29.697378588Z"
+    dependencies:
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.0.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.5.3
+    description: 'Szurubooru is an image board engine inspired by services such as
+      Danbooru, Gelbooru and Moebooru  dedicated for small and medium communities. '
+    digest: c1f331c68e5e5aedb95cd4d3251112eadc3da297e2edb87e3e9f5433414c35e8
+    home: https://github.com/toboshii/charts/tree/master/charts/szurubooru
+    keywords:
+    - szurubooru
+    - danbooru
+    - image-board
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: toboshii@users.noreply.github.com
+      name: toboshii
+    name: szurubooru
+    sources:
+    - https://github.com/rr-/szurubooru
+    urls:
+    - https://github.com/toboshii/charts/releases/download/szurubooru-1.0.1/szurubooru-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: v2.5.0
     created: "2021-08-30T01:18:09.262376235Z"
     dependencies:
     - name: common
@@ -30,4 +59,4 @@ entries:
     urls:
     - https://github.com/toboshii/charts/releases/download/szurubooru-1.0.0/szurubooru-1.0.0.tgz
     version: 1.0.0
-generated: "2021-08-30T01:18:09.262389935Z"
+generated: "2021-08-30T02:27:29.69759799Z"
