@@ -1,6 +1,6 @@
 # szurubooru
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: v2.5.0](https://img.shields.io/badge/AppVersion-v2.5.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: v2.5.0](https://img.shields.io/badge/AppVersion-v2.5.0-informational?style=flat-square)
 
 Szurubooru is an image board engine inspired by services such as Danbooru, Gelbooru and Moebooru
 dedicated for small and medium communities.
@@ -73,14 +73,14 @@ helm install szurubooru toboshii/szurubooru -f values.yaml
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| additionalContainers.server.env | object | See below (only deviations from the default settings are specified) | environment variables. See [image docs](https://github.com/rr-/szurubooru/blob/master/docker-compose.yml) for more details. |
-| additionalContainers.server.env.LOG_SQL | int | `0` | Set to 1 to enable verbose SQL logs |
-| additionalContainers.server.env.POSTGRES_DB | string | `"szurubooru"` | Postgres database name |
-| additionalContainers.server.env.POSTGRES_HOST | string | `"{{ .Release.Name }}-postgresql"` | Postgres database hostname |
-| additionalContainers.server.env.POSTGRES_PASSWORD | string | `"szurubooru"` | Postgres database password |
-| additionalContainers.server.env.POSTGRES_PORT | int | `5432` | Postgres custom port (empty = default port) |
-| additionalContainers.server.env.POSTGRES_USER | string | `"szurubooru"` | Postgres database username |
-| additionalContainers.server.env.TZ | string | `"UTC"` | Set the container timezone |
+| additionalContainers.server.env | list | See below (only deviations from the default settings are specified) | environment variables. See [image docs](https://github.com/rr-/szurubooru/blob/master/docker-compose.yml) for more details. |
+| additionalContainers.server.env[0] | object | `{"name":"TZ","value":"UTC"}` | Set the container timezone |
+| additionalContainers.server.env[1] | object | `{"name":"POSTGRES_HOST","value":"{{ .Release.Name }}-postgresql"}` | Postgres database hostname |
+| additionalContainers.server.env[2] | object | `{"name":"POSTGRES_PORT","value":5432}` | Postgres custom port (empty = default port) |
+| additionalContainers.server.env[3] | object | `{"name":"POSTGRES_USER","value":"szurubooru"}` | Postgres database username |
+| additionalContainers.server.env[4] | object | `{"name":"POSTGRES_PASSWORD","value":"szurubooru"}` | Postgres database password |
+| additionalContainers.server.env[5] | object | `{"name":"POSTGRES_DB","value":"szurubooru"}` | Postgres database name |
+| additionalContainers.server.env[6] | object | `{"name":"LOG_SQL","value":0}` | Set to 1 to enable verbose SQL logs |
 | additionalContainers.server.image | string | `"szurubooru/server:2.5-edge"` |  |
 | additionalContainers.server.imagePullPolicy | string | `"IfNotPresent"` |  |
 | additionalContainers.server.name | string | `"server"` |  |

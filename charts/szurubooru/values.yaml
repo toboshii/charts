@@ -59,19 +59,26 @@ additionalContainers:
     # @default -- See below (only deviations from the default settings are specified)
     env:
       # -- Set the container timezone
-      TZ: UTC
+      - name: TZ
+        value: UTC
       # -- Postgres database hostname
-      POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
+      - name: POSTGRES_HOST
+        value: '{{ .Release.Name }}-postgresql'
       # -- Postgres custom port (empty = default port)
-      POSTGRES_PORT: 5432
+      - name: POSTGRES_PORT
+        value: 5432
       # -- Postgres database username
-      POSTGRES_USER: szurubooru
+      - name: POSTGRES_USER
+        value: szurubooru
       # -- Postgres database password
-      POSTGRES_PASSWORD: szurubooru
+      - name: POSTGRES_PASSWORD
+        value: szurubooru
       # -- Postgres database name
-      POSTGRES_DB: szurubooru
+      - name: POSTGRES_DB
+        value: szurubooru
       # -- Set to 1 to enable verbose SQL logs
-      LOG_SQL: 0
+      - name: LOG_SQL
+        value: 0
     volumeMounts: []
 
 # -- Configure persistence settings for the chart under this key.
