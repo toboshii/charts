@@ -1,0 +1,92 @@
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+#
+
+image:
+  # -- image repository
+  repository: szurubooru/client
+  # -- image tag
+  tag: 2.5-edge
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+
+# -- environment variables. See [image docs](https://github.com/rr-/szurubooru/blob/master/docker-compose.yml)
+# for more details.
+# @default -- See below (only deviations from the default settings are specified)
+env:
+  # -- Set the container timezone
+  TZ: UTC
+  # -- Set the backend host
+  BACKEND_HOST: "{{ .Release.Name }}-server"
+  # -- Set the base URL
+  BASE_URL: https://example.com
+
+# -- Configures Szurubooru settings. See [app docs](https://github.com/rr-/szurubooru/blob/master/server/config.yaml.dist)
+# for more details.
+# @default -- See below
+szurubooru:
+  # -- Shown in the website title and on the front page
+  name: szurubooru
+  # -- Full url to the homepage of this szurubooru site, with no trailing slash
+  domain: https://example.com
+  # -- Used to salt the users' password hashes and generate filenames for static content
+  secret: change
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    ports:
+      http:
+        port: 80
+
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See values.yaml
+  main:
+    enabled: false
+
+additionalContainers:
+  server:
+    name: server
+    image: szurubooru/server:2.5-edge
+    imagePullPolicy: IfNotPresent
+    # -- environment variables. See [image docs](https://github.com/rr-/szurubooru/blob/master/docker-compose.yml)
+    # for more details.
+    # @default -- See below (only deviations from the default settings are specified)
+    env:
+      # -- Set the container timezone
+      TZ: UTC
+      # -- Postgres database hostname
+      POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
+      # -- Postgres custom port (empty = default port)
+      POSTGRES_PORT: 5432
+      # -- Postgres database username
+      POSTGRES_USER: szurubooru
+      # -- Postgres database password
+      POSTGRES_PASSWORD: szurubooru
+      # -- Postgres database name
+      POSTGRES_DB: szurubooru
+      # -- Set to 1 to enable verbose SQL logs
+      LOG_SQL: 0
+    volumeMounts: []
+
+# -- Configure persistence settings for the chart under this key.
+# @default -- See values.yaml
+persistence:
+  data:
+    enabled: false
+
+# -- Enable and configure postgresql database subchart under this key.
+#    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+# @default -- See values.yaml
+postgresql:
+  enabled: false
+  postgresqlUsername: szurubooru
+  postgresqlPassword: szurubooru
+  postgresqlDatabase: szurubooru
+  persistence:
+    enabled: false

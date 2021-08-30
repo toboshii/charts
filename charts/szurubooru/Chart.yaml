@@ -1,0 +1,26 @@
+apiVersion: v2
+appVersion: v2.5.0
+description: |
+    Szurubooru is an image board engine inspired by services such as Danbooru, Gelbooru and Moebooru 
+    dedicated for small and medium communities.
+name: szurubooru
+version: 1.0.0
+kubeVersion: ">=1.16.0-0"
+keywords:
+- szurubooru
+- danbooru
+- image-board
+home: https://github.com/toboshii/charts/tree/master/charts/szurubooru
+sources:
+- https://github.com/rr-/szurubooru
+maintainers:
+- name: toboshii
+  email: toboshii@users.noreply.github.com
+dependencies:
+- name: common
+  repository: https://library-charts.k8s-at-home.com
+  version: 4.0.0
+- name: postgresql
+  version: 10.5.3
+  repository: https://charts.bitnami.com/bitnami
+  condition: postgresql.enabled

@@ -1,0 +1,14 @@
+{{- include "common.values.setup" . }}
+
+{{- define "szurubooru.settingsVolume" -}}
+enabled: "true"
+mountPath: "/opt/app/config.yaml"
+subPath: "config.yaml"
+type: "custom"
+volumeSpec:
+  configMap:
+    name: {{ include "common.names.fullname" . }}-settings
+{{- end -}}
+{{- $_ := set .Values.persistence "szurubooru-settings" (include "szurubooru.settingsVolume" . | fromYaml) -}}
+
+{{ include "common.all" . }}
